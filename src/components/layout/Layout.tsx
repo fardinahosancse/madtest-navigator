@@ -8,7 +8,9 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Sidebar />
-      <main className="pl-64 p-8">{children}</main>
+      <main className="transition-all duration-300 pl-16 md:pl-64 p-8">
+        {children}
+      </main>
     </div>
   );
 };

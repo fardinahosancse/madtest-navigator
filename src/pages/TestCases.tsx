@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Check, ChevronDown, MoreHorizontal, Plus, Search } from "lucide-react";
 import CreateTestCaseDialog from "@/components/test-cases/CreateTestCaseDialog";
+import FolderTree from "@/components/test-cases/FolderTree";
 
 interface TestCase {
   id: string;
@@ -30,31 +31,12 @@ const TestCases = () => {
       <div className="flex h-[calc(100vh-2rem)] gap-4">
         {/* Folder Panel */}
         <div className="w-64 bg-white rounded-lg shadow p-4">
-          <div className="flex items-center justify-between mb-4">
-            <Button variant="outline" size="sm" className="gap-2">
-              New <ChevronDown size={16} />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <MoreHorizontal size={16} />
-            </Button>
-          </div>
-          <Input placeholder="Filter folders" className="mb-4" />
-          <div className="space-y-2">
-            <div className="flex items-center justify-between p-2 bg-secondary rounded-lg">
-              <span className="font-medium">All test cases</span>
-              <Badge variant="secondary">35</Badge>
-            </div>
-            <div className="pl-4">
-              <div className="flex items-center justify-between p-2 hover:bg-secondary/50 rounded-lg cursor-pointer">
-                <span>functional</span>
-                <Badge variant="secondary">27</Badge>
-              </div>
-              <div className="flex items-center justify-between p-2 hover:bg-secondary/50 rounded-lg cursor-pointer">
-                <span>non-functional</span>
-                <Badge variant="secondary">8</Badge>
-              </div>
-            </div>
-          </div>
+          <Input 
+            placeholder="Filter folders" 
+            className="mb-4" 
+            prefix={<Search className="h-4 w-4 text-gray-400" />}
+          />
+          <FolderTree />
         </div>
 
         {/* Test Cases List */}
