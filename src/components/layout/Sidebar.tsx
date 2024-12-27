@@ -1,11 +1,14 @@
 import { Home, FileText, Play, ClipboardList, Settings, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-const Sidebar = () => {
+interface SidebarProps {
+  isCollapsed: boolean;
+  onCollapse: (collapsed: boolean) => void;
+}
+
+const Sidebar = ({ isCollapsed, onCollapse }: SidebarProps) => {
   const location = useLocation();
-  const [isCollapsed, setIsCollapsed] = useState(false);
   
   const menuItems = [
     { icon: Home, label: "Dashboard", path: "/" },
@@ -18,21 +21,21 @@ const Sidebar = () => {
   return (
     <div 
       className={cn(
-        "h-screen bg-primary fixed left-0 top-0 transition-all duration-300",
+        "fixed left-0 top-0 h-screen bg-primary transition-all duration-300 ease-in-out z-10",
         isCollapsed ? "w-16" : "w-64"
       )}
     >
       <div className="flex items-center gap-2 p-4">
         <span className={cn(
           "text-2xl font-bold text-white transition-opacity duration-300",
-          isCollapsed ? "opacity-0" : "opacity-100"
+          isCollapsed ? "opacity-0 w-0" : "opacity-100"
         )}>
           MadTest
         </span>
       </div>
       
       <button
-        onClick={() => setIsCollapsed(!isCollapsed)}
+        onClick={() => onCollapse(!isCollapsed)}
         className="absolute -right-3 top-9 bg-primary rounded-full p-1 text-white hover:bg-primary/90"
       >
         {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
@@ -56,7 +59,7 @@ const Sidebar = () => {
             >
               <Icon size={20} />
               <span className={cn(
-                "transition-opacity duration-300",
+                "transition-all duration-300",
                 isCollapsed ? "opacity-0 w-0" : "opacity-100"
               )}>
                 {item.label}
